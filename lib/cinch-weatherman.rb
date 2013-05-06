@@ -1,7 +1,6 @@
-require "cinch-weatherman/version"
+require 'cinch-cooldown'
+require 'time-lord'
+require 'weather-underground'
 
-module Cinch
-  module Weatherman
-    # Your code goes here...
-  end
-end
+require 'cinch/plugins/weatherman/version'
+require 'cinch/plugins/weatherman/weatherman'
