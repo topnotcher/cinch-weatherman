@@ -6,7 +6,7 @@ require 'cinch/plugins/weatherman/version'
 Gem::Specification.new do |gem|
   gem.name          = "cinch-weatherman"
   gem.version       = Cinch::Weatherman::VERSION
-  gem.authors       = ["Brian Haberer"]
+  gem.authors       = ["Brian Haberer", "Paul Visscher"]
   gem.email         = ["bhaberer@gmail.com"]
   gem.description   = %q{Cinch Plugin to get Weather data using the Weather-Underground gem}
   gem.summary       = %q{Cinch Plugin to get Weather data}
