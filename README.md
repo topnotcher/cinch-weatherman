@@ -1,6 +1,10 @@
-# Cinch::Weatherman
+# Cinch::Plugins::Weatherman
 
-TODO: Write a gem description
+[![Gem Version](https://badge.fury.io/rb/cinch-weatherman.png)](http://badge.fury.io/rb/cinch-weatherman)
+[![Dependency Status](https://gemnasium.com/canonical-hackers/cinch-weatherman.png)](https://gemnasium.com/canonical-hackers/cinch-weatherman)
+[![Build Status](https://travis-ci.org/canonical-hackers/cinch-weatherman.png?branch=master)](https://travis-ci.org/canonical-hackers/cinch-weatherman)
+[![Coverage Status](https://coveralls.io/repos/canonical-hackers/cinch-weatherman/badge.png?branch=master)](https://coveralls.io/r/canonical-hackers/cinch-weatherman?branch=master)
+[![Code Climate](https://codeclimate.com/github/canonical-hackers/cinch-weatherman.png)](https://codeclimate.com/github/canonical-hackers/cinch-weatherman)
 
 ## Installation
 
