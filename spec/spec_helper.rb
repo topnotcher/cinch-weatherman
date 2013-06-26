@@ -1,5 +1,5 @@
 require 'coveralls'
 Coveralls.wear!
-require 'cinch-convert'
+require 'cinch-weatherman'
 require 'cinch/test'
 

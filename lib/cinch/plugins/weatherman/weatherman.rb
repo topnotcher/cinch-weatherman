@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+require 'cinch'
+require 'cinch-cooldown'
+require 'time-lord'
+require 'weather-underground'
+
 module Cinch::Plugins
   class Weatherman
     include Cinch::Plugin
@@ -7,8 +12,8 @@ module Cinch::Plugins
 
     self.help = "Use .w <location> to see information on the weather. (e.g. .w 94062)"
 
-    match /weather (.*)/
     match /w (.*)/
+    match /weather (.*)/
 
     def execute(m, query)
       m.reply get_weather(query)
@@ -17,24 +22,24 @@ module Cinch::Plugins
     private
 
     def get_weather(query)
-      @weather = WeatherUnderground::Base.new()
-      weather_data = @weather.CurrentObservations(query)
+      location, temp_f, conditions, updated = get_forcast(query)
 
-      unless weather_data.temp_f == ""
-        location = weather_data.display_location[0].full
-        temp_f = weather_data.temp_f
-        conditions = weather_data.weather.downcase
-        last_updated = weather_data.observation_time.gsub(/Last Updated on/, "")
-        last_updated_ago = Time.parse(last_updated).ago.to_words
+      message = "In #{location} it is #{conditions} "
+      message << "and #{temp_f}°F "
+      message << "(last updated about #{updated})"
 
-        message = "In #{location} it is #{conditions} "
-        message << "and #{temp_f}°F "
-        message << "(last updated about #{last_updated_ago})"
+      return message
+    rescue ArgumentError
+      return "Sorry, couldn't find #{query}."
+    end
 
-        return message
-      else
-        return "Sorry, couldn't find #{query}."
-      end
+    def get_forcast(query)
+      data = WeatherUnderground::Base.new.CurrentObservations(query)
+      weather = [ data.display_location.first.full,
+                  data.temp_f,
+                  data.weather.downcase,
+                  Time.parse(data.observation_time).ago.to_words ]
+      return weather
     end
   end
 end
