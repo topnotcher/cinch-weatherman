@@ -5,7 +5,7 @@ describe Cinch::Plugins::Weatherman do
   include Cinch::Test
 
   before(:each) do
-    @bot = make_bot(Cinch::Plugins::Weatherman, {})
+    @bot = make_bot(Cinch::Plugins::Weatherman)
   end
 
   it 'should allow users to ask for weather by zip' do
