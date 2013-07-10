@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'cinch-test'
 
   gem.add_dependency 'cinch',                 '~> 2.0.5'
-  gem.add_dependency 'weather-underground',   '>= 1.1.1'
+  gem.add_dependency 'weather-underground',   '~> 1.1.1'
   gem.add_dependency 'time-lord',             '~> 1.0.1'
-  gem.add_dependency 'cinch-cooldown'
-end
+  gem.add_dependency 'cinch-cooldown',        '~> 1.0.1'
+end 
