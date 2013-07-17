@@ -12,8 +12,7 @@ module Cinch::Plugins
 
     self.help = "Use .w <location> to see information on the weather. (e.g. .w 94062)"
 
-    match /w (.*)/
-    match /weather (.*)/
+    match /(?:w|weather) (.+)/
 
     def execute(m, query)
       m.reply get_weather(query)
