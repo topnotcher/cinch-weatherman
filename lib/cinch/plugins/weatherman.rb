@@ -5,12 +5,13 @@ require 'time-lord'
 require 'weather-underground'
 
 module Cinch::Plugins
+  # Cinch Plugin to report weather
   class Weatherman
     include Cinch::Plugin
 
     enforce_cooldown
 
-    self.help = "Use .w <location> to see information on the weather. (e.g. .w 94062)"
+    self.help = 'Use .w <location> to see information on the weather.'
 
     match /(?:w|weather) (.+)/
 
@@ -27,18 +28,18 @@ module Cinch::Plugins
       message << "and #{temp_f}°F "
       message << "(last updated about #{updated})"
 
-      return message
+      message
     rescue ArgumentError
-      return "Sorry, couldn't find #{query}."
+      "Sorry, couldn't find #{query}."
     end
 
     def get_forcast(query)
       data = WeatherUnderground::Base.new.CurrentObservations(query)
-      weather = [ data.display_location.first.full,
-                  data.temp_f,
-                  data.weather.downcase,
-                  Time.parse(data.observation_time).ago.to_words ]
-      return weather
+      weather = [data.display_location.first.full,
+                 data.temp_f,
+                 data.weather.downcase,
+                 Time.parse(data.observation_time).ago.to_words]
+      weather
     end
   end
 end
