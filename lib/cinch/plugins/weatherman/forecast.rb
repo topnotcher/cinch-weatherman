@@ -16,6 +16,10 @@ module Cinch::Plugins
         "Tommorrow in #{@location}; #{@forecast}, " +
         "high of #{@temp_high}F, low of #{@temp_low}F."
       end
+
+      def append
+        to_s.gsub(" in #{@location}", '')
+      end
     end
   end
 end

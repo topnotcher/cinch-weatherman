@@ -33,7 +33,7 @@ module Cinch::Plugins
 
     def get_weather(query)
       weather = Weather.new(query).to_s
-      weather << " #{Forecast.new(query).to_s}" if true
+      weather << " #{Forecast.new(query).append}" if true
       weather
     rescue ArgumentError
       "Sorry, couldn't find #{query}."

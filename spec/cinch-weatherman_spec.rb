@@ -39,12 +39,12 @@ describe Cinch::Plugins::Weatherman do
        .should include('Sorry, couldn\'t find 34.')
     end
 
-    it 'should allow users to ask for weather by zip' do
+    it 'should allow users to append forecasts' do
       bot = make_bot(Cinch::Plugins::Weatherman, { append_forecast: true })
       msg = make_message(@bot, '!weather 94062')
       message = get_replies(msg).first.text
-      message.should include('Tommorrow in Redwood City, CA;')
       message.should include('In Redwood City, CA it is')
+      message.should include('Tommorrow;')
     end
 
   end
@@ -73,6 +73,7 @@ describe Cinch::Plugins::Weatherman do
       get_replies(msg).last.text
        .should include('Sorry, couldn\'t find 34.')
     end
+
     it 'should return temps' do
       msg = make_message(@bot, '!weather redwood city, ca')
       get_replies(msg).last.text
