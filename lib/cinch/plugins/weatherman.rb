@@ -13,33 +13,36 @@ module Cinch::Plugins
 
     self.help = 'Use .w <location> to see information on the weather.'
 
-    match /(?:w|weather) (.+)/
+    def initialize(*args)
+      super
+      @append = config[:append_forecast] || false
+    end
 
-    def execute(m, query)
+    match(/(?:w|weather) (.+)/, method: :weather)
+    match(/forecast (.+)/,      method: :forecast)
+
+    def weather(m, query)
       m.reply get_weather(query)
+    end
+
+    def forecast(m, query)
+      m.reply get_forecast(query)
     end
 
     private
 
     def get_weather(query)
-      location, temp_f, conditions, updated = get_forcast(query)
-
-      message = "In #{location} it is #{conditions} "
-      message << "and #{temp_f}°F "
-      message << "(last updated about #{updated})"
-
-      message
+      weather = Weather.new(query).to_s
+      weather << " #{Forecast.new(query).to_s}" if true
+      weather
     rescue ArgumentError
       "Sorry, couldn't find #{query}."
     end
 
-    def get_forcast(query)
-      data = WeatherUnderground::Base.new.CurrentObservations(query)
-      weather = [data.display_location.first.full,
-                 data.temp_f,
-                 data.weather.downcase,
-                 Time.parse(data.observation_time).ago.to_words]
-      weather
+    def get_forecast(query)
+      Forecast.new(query).to_s
+    rescue ArgumentError
+      "Sorry, couldn't find #{query}."
     end
   end
 end
