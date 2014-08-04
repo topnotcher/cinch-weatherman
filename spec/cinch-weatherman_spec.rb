@@ -41,7 +41,7 @@ describe Cinch::Plugins::Weatherman do
 
     it 'should allow users to append forecasts' do
       bot = make_bot(Cinch::Plugins::Weatherman, { append_forecast: true })
-      msg = make_message(@bot, '!weather 94062')
+      msg = make_message(bot, '!weather 94062')
       message = get_replies(msg).last.text
       expect(message).to include('In Redwood City, CA it is')
       expect(message).to include('Tommorrow;')

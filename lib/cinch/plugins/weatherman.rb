@@ -16,7 +16,12 @@ module Cinch
 
       def initialize(*args)
         super
-        @append = config[:append_forecast] || false
+        @append =
+          if config.key?(:append_forecast)
+            config[:append_forecast]
+          else
+            false
+          end
       end
 
       match(/(?:w|weather) (.+)/, method: :weather)
@@ -34,7 +39,8 @@ module Cinch
 
       def get_weather(query)
         weather = Weather.new(query).to_s
-        weather << " #{Forecast.new(query)}" if @append
+        weather << " #{Forecast.new(query).append}" if @append
+        debug "#{@append.to_s}  #{config}"
         weather
       rescue ArgumentError
         "Sorry, couldn't find #{query}."
