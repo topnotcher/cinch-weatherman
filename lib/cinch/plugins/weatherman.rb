@@ -25,7 +25,7 @@ module Cinch
       end
 
       match(/(?:w|weather) (.+)/, method: :weather)
-      match(/forecast (.+)/,      method: :forecast)
+      match(/(?:f|forecast) (.+)/, method: :forecast)
 
       def weather(m, query)
         m.reply get_weather(query)
