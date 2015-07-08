@@ -12,12 +12,13 @@ module Cinch
           @temp = @data.temperature_string
           @conditions = @data.weather.downcase
           @humidity = @data.relative_humidity
+          @feels_like = @data.feelslike_string
           @updated = Time.parse(@data.observation_time).ago.to_words
         end
 
         def to_s
           "In #{@location} it is #{@conditions} " \
-          "and #{@temp} with #{@humidity} relative humidity (last updated about #{@updated})."
+          "and #{@temp} with #{@humidity} relative humidity [feels like: #{@feels_like}] (last updated about #{@updated})."
         end
       end
     end
